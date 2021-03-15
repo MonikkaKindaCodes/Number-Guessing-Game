@@ -7,7 +7,7 @@
 // //Lines above are examples of DOM manipulation.
 
 //Setting Secret Number
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 console.log(secretNumber);
 
 //Score Changes
@@ -17,14 +17,19 @@ document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value); //JS will call this function when the event happens. We will not be manually calling this function in the event listener.
   console.log(guess, typeof guess);
 
-  if (!guess) {
+  if (!guess || guess < 0 || guess > 20) {
     //You will get zero. Zero is a falsy value. Will give a boolean or false
     document.querySelector('.message').textContent =
       'Invalid Entry. Please Try Again'; //This changes the text in that area.
-  } else if (guess === secretNumber && guess <= 20) {
+
+    //When Player Wins the Game
+  } else if (guess === secretNumber) {
     document.querySelector('.message').textContent =
       'You have the Secret Number! You Win!';
     document.querySelector('.number').textContent = secretNumber;
+    document.querySelector('body').style.backgroundColor = '#60b347';
+    document.querySelector('.number').style.width = '30rem';
+    //When Guess is Too High
   } else if (guess > secretNumber && guess <= 20) {
     if (score > 1) {
       document.querySelector('.message').textContent = 'Too High. Try Again';
@@ -32,9 +37,11 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.score').textContent = score;
     } else {
       document.querySelector('.message').textContent =
-        'Game Over. Please Refresh to Restart Game';
+        'Game Over. Please Select Again to Restart Game';
       document.querySelector('.score').textContent = 0;
     }
+
+    //When Guess is Too Low
   } else if (guess < secretNumber && guess <= 20) {
     if (score > 1) {
       document.querySelector('.message').textContent = 'Too Low. Try Again';
@@ -42,11 +49,19 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.score').textContent = score;
     } else {
       document.querySelector('.message').textContent =
-        'Game Over. Please Refresh to Restart Game';
+        'Game Over. Please Select Again to Restart Game';
       document.querySelector('.score').textContent = 0;
     }
-  } else {
-    document.querySelector('.message').textContent =
-      'Please Enter A Number between 1 and 20';
   }
+});
+
+document.querySelector('.again').addEventListener('click', function () {
+  score = 20;
+  document.querySelector('.score').textContent = score;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.guess').value = '';
 });
