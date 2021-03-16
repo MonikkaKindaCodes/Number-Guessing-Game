@@ -11,6 +11,12 @@ const displayMessage = function (message) {
   document.querySelector('.message').textContent = message;
   return message;
 }
+const displayScore = function (score) {
+  document.querySelector('.score').textContent = score;
+  return score;
+}
+
+
 
 
 document.querySelector('.check').addEventListener('click', function () {
@@ -40,17 +46,17 @@ document.querySelector('.check').addEventListener('click', function () {
       //Added Ternary Operator to get rid of the Too High, Too Low if/else blocks
       displayMessage(guess > secretNumber ? 'Too High, Try Again' : 'Too Low, Try Again');
       score--;
-      document.querySelector('.score').textContent = score;
+      displayScore(score);
     } else {
       displayMessage('Game Over. Please Select Again to Restart Game');
-      document.querySelector('.score').textContent = 0;
+      displayScore(0);
     }
   }
 });
 
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
-  document.querySelector('.score').textContent = score;
+  displayScore(score);
   secretNumber = Math.trunc(Math.random() * 20) + 1;
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
