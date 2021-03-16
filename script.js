@@ -17,8 +17,6 @@ const displayScore = function (score) {
 }
 
 
-
-
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value); //JS will call this function when the event happens. We will not be manually calling this function in the event listener.
   console.log(guess, typeof guess);
@@ -50,6 +48,8 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       displayMessage('Game Over. Please Select Again to Restart Game');
       displayScore(0);
+      document.querySelector('body').style.backgroundColor = '#b53737';
+      document.querySelector('.number').textContent = 'X';
     }
   }
 });
@@ -64,3 +64,4 @@ document.querySelector('.again').addEventListener('click', function () {
   displayMessage('Start guessing...');
   document.querySelector('.guess').value = '';
 });
+
