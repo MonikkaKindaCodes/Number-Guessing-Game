@@ -35,22 +35,11 @@ document.querySelector('.check').addEventListener('click', function () {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
     }
-    //When Guess is Too High
-  } else if (guess > secretNumber && guess <= 20) {
+    //When Guess is Too High or Low
+  }
+  else if (guess !== secretNumber) {
     if (score > 1) {
-      document.querySelector('.message').textContent = 'Too High. Try Again';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent =
-        'Game Over. Please Select Again to Restart Game';
-      document.querySelector('.score').textContent = 0;
-    }
-
-    //When Guess is Too Low
-  } else if (guess < secretNumber && guess <= 20) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = 'Too Low. Try Again';
+      document.querySelector('.message').textContent = guess > secretNumber ? 'Too High, Try Again' : 'Too Low Try Again';
       score--;
       document.querySelector('.score').textContent = score;
     } else {
